@@ -1,3 +1,4 @@
+	
 var previewPopupHtml = '<div id="customily-preview-container" class="modal" style="display:none;"><div id="preview-container"><img class="c-image" src=""><div class="customily-close-button"><p>X</p></div></div></div>'
 var emptyImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
 var previewButtonHtml = '<div id="customily-preview-button" style="cursor:pointer;margin-bottom:1em;border-style:solid;border-width:1px;border-color:#2f80ed;border-radius:5px;padding:10px;color:black;text-align: center;">Preview Your Personalization</div>'
@@ -165,12 +166,15 @@ function fixVariantionCombination() {
 }
 
 function customSingleProductPage() {
-	jQuery('img.wp-post-image,img.flex-active').each(function() {
+	jQuery('img.wp-post-image').each(function() {
 		var img = new Image();
 		img.onload = function() {
-			jQuery('div.flex-viewport').css('height', '370px');
+			console.log('customSingleProductPage')
+			jQuery('div.flex-viewport').css('height', '370px')
+			jQuery('div.flex-viewport').css('margin-bottom', '25px')
 			jQuery('figure.woocommerce-product-gallery__wrapper').css('display', '');
 			jQuery('div.woocommerce-product-gallery.loading-placehoder').css('display', 'none');
+			jQuery('.flex-control-thumbs').css({'max-height': '500px', 'margin-bottom': '20px'});
 		}
 		img.src = jQuery(this).attr('src');
 	})
