@@ -202,3 +202,15 @@ section.related.products>h2 {
 section.related.products>ul {
 	justify-content: center
 }
+
+.product-details-wrapper {
+	padding-top: 20px;
+}
+
+.custom-product-reviews {
+	margin-top:1.5em !important;
+	padding-bottom:1em !important;
+}
+
+
+

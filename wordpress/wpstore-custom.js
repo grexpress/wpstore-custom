@@ -165,18 +165,16 @@ function fixVariantionCombination() {
 }
 
 function customSingleProductPage() {
-    jQuery('div.product-details-wrapper').ready(function() {
-        let imageLoaded = false
-        jQuery('div.woocommerce-product-gallery__image > a > img').on('load', function() {
-            if (!imageLoaded) {
-                imageLoaded = true
-                jQuery('div.flex-viewport').css('height', '370px');
-                jQuery('figure.woocommerce-product-gallery__wrapper').css('display', '');
-                jQuery('div.woocommerce-product-gallery.loading-placehoder').css('display', 'none');
-            }
-        })
-    })
-
+	jQuery('img.wp-post-image,img.flex-active').each(function() {
+		var img = new Image();
+		img.onload = function() {
+			jQuery('div.flex-viewport').css('height', '370px');
+			jQuery('figure.woocommerce-product-gallery__wrapper').css('display', '');
+			jQuery('div.woocommerce-product-gallery.loading-placehoder').css('display', 'none');
+		}
+		img.src = jQuery(this).attr('src');
+	})
+	
     jQuery('form.variations_form').ready(function() {
         let enableSizeGuide
         let sizeValues = []
