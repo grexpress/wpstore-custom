@@ -166,18 +166,7 @@ function fixVariantionCombination() {
 }
 
 function customSingleProductPage() {
-	jQuery('img.wp-post-image').each(function() {
-		var img = new Image();
-		img.onload = function() {
-			console.log('customSingleProductPage')
-			jQuery('div.flex-viewport').css('height', '370px')
-			jQuery('div.flex-viewport').css('margin-bottom', '25px')
-			jQuery('figure.woocommerce-product-gallery__wrapper').css('display', '');
-			jQuery('div.woocommerce-product-gallery.loading-placehoder').css('display', 'none');
-			jQuery('.flex-control-thumbs').css({'max-height': '500px', 'margin-bottom': '20px'});
-		}
-		img.src = jQuery(this).attr('src');
-	})
+    let iframeUrl
 	
     jQuery('form.variations_form').ready(function() {
         let enableSizeGuide
@@ -190,7 +179,8 @@ function customSingleProductPage() {
                 sizeValues.push(jQuery(this).text().trim().toLowerCase())
             })
             let sizeValueText = sizeValues.join()
-            enableSizeGuide = sizeValues.length > 0 && !['inch', '"', 'feet'].some(text => sizeValueText.includes(text)) && !['cm', 'oz'].some(text => sizeValueText.endsWith(text))
+            enableSizeGuide = sizeValues.length > 0 && !['cm', 'oz'].some(text => sizeValueText.endsWith(text)) 
+                              && !['inch', '"', 'feet', 'pack'].some(text => sizeValueText.includes(text)) 
             if (enableSizeGuide) {
                 let hashQueries = []
                 jQuery(this).find('td > label > span').append('<a id="size-guide"> - <span><strong>Size Guide</strong> <i class="eicon-cursor-move"/></span></a>')
@@ -205,7 +195,7 @@ function customSingleProductPage() {
 					</div>
 					</div>
 				`).insertAfter('div.product-details-wrapper')
-                let iframeUrl = 'https://wps.grexpress.net/redirect?q=size-guide&key=0YoSUH6bJ2nWagNRFeXs&hash=' + hashQueries.join(',')
+                iframeUrl = 'https://wps.grexpress.net/redirect?q=size-guide&key=0YoSUH6bJ2nWagNRFeXs&hash=' + hashQueries.join(',')
                 jQuery('#size-guide').click(function() {
                     jQuery('.gr-full-width-iframe').attr('src', iframeUrl)
                     jQuery('.gr-modal-overlay, .gr-modal').addClass('active')
@@ -219,6 +209,20 @@ function customSingleProductPage() {
             }
         })
     })
+    
+    jQuery('img.wp-post-image').each(function() {
+		var img = new Image();
+		img.onload = function() {
+			jQuery('div.flex-viewport').css('height', '370px')
+			jQuery('div.flex-viewport').css('margin-bottom', '25px')
+			jQuery('figure.woocommerce-product-gallery__wrapper').css('display', '');
+			jQuery('div.woocommerce-product-gallery.loading-placehoder').css('display', 'none');
+			jQuery('.flex-control-thumbs').css({'max-height': '500px', 'margin-bottom': '20px'});
+            if(iframeUrl) jQuery('.gr-full-width-iframe').attr('src', iframeUrl)
+		}
+		img.src = jQuery(this).attr('src');
+	})
+
     jQuery('.related-wrapper').ready(function() {
         jQuery('.related-wrapper').detach().insertBefore(jQuery('.woocommerce-tabs'));
     })
