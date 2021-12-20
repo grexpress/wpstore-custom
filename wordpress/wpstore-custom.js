@@ -228,12 +228,24 @@ function customSingleProductPage() {
     })
 }
 
+function addChristmasNotice() {
+	jQuery('div.summary > p.price').ready(function() {
+		let html = `
+		<div class="clear"></div>
+		<div style="border-radius:10px;padding:10px;background:#fcf6ef;margin-top:10px;margin-bottom:-10px;"> 
+		<p style="margin:0"> <b>Notice:</b> <span>The deadline for Christmas delivery has been passed.&nbsp;</span></p>
+		</div>
+		`
+		jQuery(html).insertAfter('div.summary > p.price')
+	})
+}
+
 jQuery(document).ready(function() {
     customSingleProductPage()
     addCustomilyCustom()
     addPreviewCartItemDesign()
     fixVariantionCombination()
-
+	addChristmasNotice()
 })
 
 window.customilyAllValid = function() {
