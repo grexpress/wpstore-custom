@@ -245,7 +245,7 @@ jQuery(document).ready(function() {
     addCustomilyCustom()
     addPreviewCartItemDesign()
     fixVariantionCombination()
-	addChristmasNotice()
+    // addChristmasNotice()
 })
 
 window.customilyAllValid = function() {
