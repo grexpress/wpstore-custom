@@ -210,18 +210,26 @@ function customSingleProductPage() {
         })
     })
     
-    jQuery('img.wp-post-image').each(function() {
-		var img = new Image();
-		img.onload = function() {
-			jQuery('div.flex-viewport').css('height', '370px')
-			jQuery('div.flex-viewport').css('margin-bottom', '25px')
-			jQuery('figure.woocommerce-product-gallery__wrapper').css('display', '');
-			jQuery('div.woocommerce-product-gallery.loading-placehoder').css('display', 'none');
-			jQuery('.flex-control-thumbs').css({'max-height': '500px', 'margin-bottom': '20px'});
-            if(iframeUrl) jQuery('.gr-full-width-iframe').attr('src', iframeUrl)
-		}
-		img.src = jQuery(this).attr('src');
-	})
+    let postImages = jQuery('img.wp-post-image');
+    let hideLoadingFn = function () { jQuery('div.woocommerce-product-gallery.loading-placehoder').css('display', 'none'); }
+    if(postImages.size() > 0) {
+        postImages.each(function() {
+            var img = new Image();
+            img.onload = function() {
+                jQuery('div.flex-viewport').css('height', '370px')
+                jQuery('div.flex-viewport').css('margin-bottom', '25px')
+                jQuery('figure.woocommerce-product-gallery__wrapper').css('display', '');
+                hideLoadingFn()
+                jQuery('.flex-control-thumbs').css({'max-height': '500px', 'margin-bottom': '20px'});
+                if(iframeUrl) jQuery('.gr-full-width-iframe').attr('src', iframeUrl)
+            }
+            img.onerror = hideLoadingFn
+            img.src = jQuery(this).attr('src');
+        })
+    } else {
+        hideLoadingFn()
+    }
+    
 
     jQuery('.related-wrapper').ready(function() {
         jQuery('.related-wrapper').detach().insertBefore(jQuery('.woocommerce-tabs'));
