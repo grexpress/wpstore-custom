@@ -216,11 +216,14 @@ function customSingleProductPage() {
         postImages.each(function() {
             var img = new Image();
             img.onload = function() {
+				hideLoadingFn()
                 jQuery('div.flex-viewport').css('height', '370px')
-                jQuery('div.flex-viewport').css('margin-bottom', '25px !important')
+				jQuery('div.flex-viewport').each(function() {
+					var origStyleContent = jQuery(this).attr('style');
+					jQuery(this).attr('style', origStyleContent + ';margin-bottom: 25px !important');
+				})
                 jQuery('figure.woocommerce-product-gallery__wrapper').css('display', '');
-                hideLoadingFn()
-                jQuery('.flex-control-thumbs').css({'max-height': '500px', 'margin-bottom': '20px !important'});
+                jQuery('.flex-control-thumbs').css({'max-height': '500px'});
                 if(iframeUrl) jQuery('.gr-full-width-iframe').attr('src', iframeUrl)
             }
             img.onerror = hideLoadingFn
