@@ -217,10 +217,10 @@ function customSingleProductPage() {
             var img = new Image();
             img.onload = function() {
                 jQuery('div.flex-viewport').css('height', '370px')
-                jQuery('div.flex-viewport').css('margin-bottom', '25px')
+                jQuery('div.flex-viewport').css('margin-bottom', '25px !important')
                 jQuery('figure.woocommerce-product-gallery__wrapper').css('display', '');
                 hideLoadingFn()
-                jQuery('.flex-control-thumbs').css({'max-height': '500px', 'margin-bottom': '20px'});
+                jQuery('.flex-control-thumbs').css({'max-height': '500px', 'margin-bottom': '20px !important'});
                 if(iframeUrl) jQuery('.gr-full-width-iframe').attr('src', iframeUrl)
             }
             img.onerror = hideLoadingFn
