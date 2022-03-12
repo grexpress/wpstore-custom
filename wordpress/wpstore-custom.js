@@ -172,7 +172,7 @@ function customSingleProductPage() {
         let enableSizeGuide
         let sizeValues = []
         jQuery('tbody > tr').each(function() {
-            let labelText = jQuery(this).find('td > label > span').text().replace(/\W/g, '').toLowerCase()
+            let labelText = jQuery(this).find('.label').text().replace(/\W/g, '').toLowerCase()
             if (labelText != 'size') return
 
             jQuery(this).find('td.value > select > option').each(function() {
