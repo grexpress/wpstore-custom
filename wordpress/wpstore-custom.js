@@ -172,7 +172,7 @@ function customSingleProductPage() {
         let enableSizeGuide
         let sizeValues = []
         jQuery('tbody > tr').each(function() {
-            let labelText = jQuery(this).find('.label').text().replace(/\W/g, '').toLowerCase()
+            let labelText = jQuery(this).find('.label > label > span').text().replace(/\W/g, '').toLowerCase()
             if (labelText != 'size') return
 
             jQuery(this).find('td.value > select > option').each(function() {
@@ -183,7 +183,7 @@ function customSingleProductPage() {
                               && !['inch', '"', 'feet', 'pack'].some(text => sizeValueText.includes(text)) 
             if (enableSizeGuide) {
                 let hashQueries = []
-                jQuery(this).find('td > label > span').append('<a id="size-guide"> - <span><strong>Size Guide</strong> <i class="eicon-cursor-move"/></span></a>')
+                jQuery(this).find('.label > label > span').append('<a id="size-guide"> - <span><strong>Size Guide</strong> <i class="eicon-cursor-move"/></span></a>')
                 jQuery('span.posted_in > a').each(function() {
                     hashQueries.push(jQuery(this).text())
                 })
