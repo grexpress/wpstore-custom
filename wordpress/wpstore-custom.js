@@ -60,7 +60,7 @@ function addCustomilyCustom() {
         let customilyRoot = this
         jQuery('img[src=""]').css('display', 'none');
         jQuery(previewButtonHtml).insertAfter('#customily-options')
-        insertPreviewContainer('div.product-details-wrapper')
+        insertPreviewContainer('#main')
         onChildNodeAdded('#customily-options', function() {
             startLoadImage(customilyRoot)
         })
