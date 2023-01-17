@@ -97,7 +97,7 @@ function addPreviewCartItemDesign() {
 }
 
 function fixVariantionCombination() {
-    if(windows.disableFixVariantionCombination) return;
+    if(window.disableFixVariantionCombination) return;
 	
     jQuery('form.variations_form').ready(function() {
         var productId = jQuery('form.variations_form').attr('data-product_id')
@@ -171,7 +171,7 @@ function customSingleProductPage() {
     let iframeUrl
 	
     jQuery('form.variations_form').ready(function() {
-	if(windows.disableSizeGuide) return;
+	if(window.disableSizeGuide) return;
 
         let enableSizeGuide
         let sizeValues = []
@@ -214,7 +214,7 @@ function customSingleProductPage() {
         })
     })
     
-    if(!windows.disableImageLoading) { 
+    if(!window.disableImageLoading) { 
       let postImages = jQuery('img.wp-post-image');
       let hideLoadingFn = function () { jQuery('div.woocommerce-product-gallery.loading-placehoder').css('display', 'none'); }
       if(postImages.size() > 0) {
