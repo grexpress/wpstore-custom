@@ -60,7 +60,7 @@ function addCustomilyCustom() {
         let customilyRoot = this
         jQuery('img[src=""]').css('display', 'none');
         jQuery(previewButtonHtml).insertAfter('#customily-options')
-        insertPreviewContainer('div.product-details-wrapper')
+        insertPreviewContainer('#main')
         onChildNodeAdded('#customily-options', function() {
             startLoadImage(customilyRoot)
         })
@@ -97,6 +97,8 @@ function addPreviewCartItemDesign() {
 }
 
 function fixVariantionCombination() {
+    if(windows.disableFixVariantionCombination) return;
+	
     jQuery('form.variations_form').ready(function() {
         var productId = jQuery('form.variations_form').attr('data-product_id')
         let attrCount = {}
@@ -169,10 +171,12 @@ function customSingleProductPage() {
     let iframeUrl
 	
     jQuery('form.variations_form').ready(function() {
+	if(windows.disableSizeGuide) return;
+
         let enableSizeGuide
         let sizeValues = []
         jQuery('tbody > tr').each(function() {
-            let labelText = jQuery(this).find('td > label > span').text().replace(/\W/g, '').toLowerCase()
+            let labelText = jQuery(this).find('.label > label > span').text().replace(/\W/g, '').toLowerCase()
             if (labelText != 'size') return
 
             jQuery(this).find('td.value > select > option').each(function() {
@@ -183,7 +187,7 @@ function customSingleProductPage() {
                               && !['inch', '"', 'feet', 'pack'].some(text => sizeValueText.includes(text)) 
             if (enableSizeGuide) {
                 let hashQueries = []
-                jQuery(this).find('td > label > span').append('<a id="size-guide"> - <span><strong>Size Guide</strong> <i class="eicon-cursor-move"/></span></a>')
+                jQuery(this).find('.label > label > span').append('<a id="size-guide"> - <span><strong>Size Guide</strong> <i class="eicon-cursor-move"/></span></a>')
                 jQuery('span.posted_in > a').each(function() {
                     hashQueries.push(jQuery(this).text())
                 })
@@ -210,9 +214,10 @@ function customSingleProductPage() {
         })
     })
     
-    let postImages = jQuery('img.wp-post-image');
-    let hideLoadingFn = function () { jQuery('div.woocommerce-product-gallery.loading-placehoder').css('display', 'none'); }
-    if(postImages.size() > 0) {
+    if(!windows.disableImageLoading) { 
+      let postImages = jQuery('img.wp-post-image');
+      let hideLoadingFn = function () { jQuery('div.woocommerce-product-gallery.loading-placehoder').css('display', 'none'); }
+      if(postImages.size() > 0) {
         postImages.each(function() {
             var img = new Image();
             img.onload = function() {
@@ -229,25 +234,27 @@ function customSingleProductPage() {
             img.onerror = hideLoadingFn
             img.src = jQuery(this).attr('src');
         })
-    } else {
+      } else {
         hideLoadingFn()
+      }
     }
-    
 
     jQuery('.related-wrapper').ready(function() {
         jQuery('.related-wrapper').detach().insertBefore(jQuery('.woocommerce-tabs'));
     })
 }
 
-function addChristmasNotice() {
+function addProductNotice() {
+  if(window.productNotice) {
 	jQuery('div.summary > div.clear:last-child').ready(function() {
 		let html = `
 		<div style="border-radius:10px;padding:10px;background:#fcf6ef;margin-top:10px;margin-bottom:-10px"> 
-			<p style="margin:0"> <b>Notice:</b> <span>The deadline for Christmas delivery has been passed.&nbsp;</span></p>
+			<p style="margin:0"> <b>Notice:</b> <span>${window.productNotice}</span></p>
 		</div>
 		`
 		jQuery(html).insertAfter(jQuery('div.summary > div.clear').last())
 	})
+  }
 }
 
 
@@ -256,7 +263,7 @@ jQuery(document).ready(function() {
     addCustomilyCustom()
     addPreviewCartItemDesign()
     fixVariantionCombination()
-    // addChristmasNotice()
+    addProductNotice()
 })
 
 window.customilyAllValid = function() {
