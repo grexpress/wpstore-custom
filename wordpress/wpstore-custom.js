@@ -187,7 +187,7 @@ function customSingleProductPage() {
                               && !['inch', '"', 'feet', 'pack'].some(text => sizeValueText.includes(text)) 
             if (enableSizeGuide) {
                 let hashQueries = []
-                jQuery(this).find('.label > label > span').append('<a id="size-guide"> - <span><strong>Size Guide</strong> <i class="eicon-cursor-move"/></span></a>')
+                jQuery(this).find('.label > label').append('<a id="size-guide"> - <span><strong>Size Guide</strong> <i class="eicon-cursor-move"/></span></a>')
                 jQuery('span.posted_in > a').each(function() {
                     hashQueries.push(jQuery(this).text())
                 })
