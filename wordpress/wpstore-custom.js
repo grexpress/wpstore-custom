@@ -198,7 +198,7 @@ function customSingleProductPage() {
 						<div class="modal-content"><iframe src="" class="gr-full-width-iframe"></iframe></div>
 					</div>
 					</div>
-				`).insertAfter('div.product-details-wrapper')
+				`).insertAfter('form.variations_form')
                 iframeUrl = 'https://wps.grexpress.net/redirect?q=size-guide&key=0YoSUH6bJ2nWagNRFeXs&hash=' + hashQueries.join(',')
                 jQuery('#size-guide').click(function() {
                     jQuery('.gr-full-width-iframe').attr('src', iframeUrl)
