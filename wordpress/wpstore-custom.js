@@ -59,7 +59,7 @@ function addCustomilyCustom() {
     jQuery('#customily-options').ready(function() {
         let customilyRoot = this
         jQuery('img[src=""]').css('display', 'none');
-        jQuery(previewButtonHtml).insertAfter('#customily-options')
+        jQuery(previewButtonHtml).insertAfter('.woocommerce-variation-add-to-cart > div.quantity.buttons_added')
         insertPreviewContainer('#main')
         onChildNodeAdded('#customily-options', function() {
             startLoadImage(customilyRoot)
