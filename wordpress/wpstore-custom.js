@@ -162,7 +162,7 @@ function fixVariantionCombination() {
             variantOptions = result || []
             if(variantOptions.length > 0) {
 		jQuery('table.variations > tbody > tr > td.value select:first').trigger('change')
-		jQuery('table.variations > tbody > tr > td.value ul > li.abc').first().click()
+		jQuery('table.variations > tbody > tr > td.value ul > li').first().click()
 	    }
         })
     })
