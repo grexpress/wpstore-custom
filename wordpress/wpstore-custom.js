@@ -160,7 +160,7 @@ function fixVariantionCombination() {
             product_id: productId
         }, function(result) {
             variantOptions = result || []
-            variantOptions.length > 0 && jQuery('table.variations > tbody > tr > td.value > select:first').trigger('change')
+            variantOptions.length > 0 && jQuery('table.variations > tbody > tr > td.value select:first').trigger('change')
         })
     })
 }
