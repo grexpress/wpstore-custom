@@ -163,7 +163,10 @@ function fixVariantionCombination() {
             product_id: productId
         }, function(result) {
             variantOptions = result || []
-            variantOptions.length > 0 && jQuery('table.variations > tbody > tr > td.value > select:first').trigger('change')
+	    if(variantOptions.length > 0) {
+		jQuery('table.variations > tbody > tr > td.value select:first').trigger('change')
+		jQuery('table.variations > tbody > tr > td.value ul > li').first().click()
+	    }
         })
     })
 }
