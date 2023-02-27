@@ -103,7 +103,7 @@ function fixVariantionCombination() {
         var productId = jQuery('form.variations_form').attr('data-product_id')
         let attrCount = {}
         let totalVariantCount = 1
-        jQuery('table.variations > tbody > tr > td.value > select').each(function() {
+        jQuery('table.variations > tbody > tr > td.value select').each(function() {
             let hasValueCount = jQuery(this).find('option[value!=""]').size();
             if (hasValueCount == 1) jQuery(this).val(jQuery(this).find('option[value!=""]').first().attr('value'))
             let attrName = jQuery(this).attr('name')
@@ -113,7 +113,7 @@ function fixVariantionCombination() {
         let attrNames = Object.keys(attrCount)
         let variantOptions = []
         let selectedOptionValue = {}
-        jQuery('table.variations > tbody > tr > td.value > select').on('change', function(event) {
+        jQuery('table.variations > tbody > tr > td.value select').on('change', function(event) {
             if (variantOptions.length == 0 || variantOptions.length == totalVariantCount) return
 
             let {
@@ -139,7 +139,7 @@ function fixVariantionCombination() {
 
             for (let [key, values] of Object.entries(valueByName)) {
                 if (attrNames.indexOf(key) <= optionIndex) continue
-                jQuery(`table.variations > tbody > tr > td.value > select[name="${key}"]`).each(function() {
+                jQuery(`table.variations > tbody > tr > td.value select[name="${key}"]`).each(function() {
                     let currSelect = this
                     let isSelectVisibleValue = true
                     let selectedValue = jQuery(this).children("option:selected").val();
@@ -154,6 +154,7 @@ function fixVariantionCombination() {
                             setTimeout(() => jQuery(currSelect).trigger('change'), 100)
                         }
                         jQuery(this).css('display', visible ? '' : 'none')
+			jQuery(`li[data-value="${value}"]`).css('display', visible ? '' : 'none')
                     })
                 })
             }
