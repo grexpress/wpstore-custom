@@ -59,7 +59,7 @@ function addCustomilyCustom() {
     jQuery('#customily-options').ready(function() {
         let customilyRoot = this
         jQuery('img[src=""]').css('display', 'none');
-        jQuery(previewButtonHtml).insertAfter('.woocommerce-variation-add-to-cart > div.quantity.buttons_added')
+        jQuery(previewButtonHtml).insertAfter('div.quantity.buttons_added')
         insertPreviewContainer('#main')
         onChildNodeAdded('#customily-options', function() {
             startLoadImage(customilyRoot)
@@ -263,11 +263,13 @@ function addProductNotice() {
 
 
 jQuery(document).ready(function() {
-    customSingleProductPage()
-    addCustomilyCustom()
-    addPreviewCartItemDesign()
-    fixVariantionCombination()
-    addProductNotice()
+    if(window.location.href.includes('/product')) {
+	customSingleProductPage()
+	addCustomilyCustom()
+	addPreviewCartItemDesign()
+	fixVariantionCombination()
+	addProductNotice()
+    }
 })
 
 window.customilyAllValid = function() {
