@@ -263,7 +263,7 @@ function addProductNotice() {
 
 
 jQuery(document).ready(function() {
-    if(window.location.href.includes('/product')) {
+    if(window.location.href.includes('/product') || window.location.href.includes('preview=true')) {
 	customSingleProductPage()
 	addCustomilyCustom()
 	addPreviewCartItemDesign()
