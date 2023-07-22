@@ -57,6 +57,8 @@ function startLoadImage(parrent) {
 
 function addCustomilyCustom() {
     jQuery('#customily-options').ready(function() {
+	if(!jQuery('#customily-options').length) return;
+
         let customilyRoot = this
         jQuery('img[src=""]').css('display', 'none');
         jQuery(previewButtonHtml).insertAfter('div.quantity.buttons_added')
