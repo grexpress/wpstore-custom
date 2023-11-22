@@ -185,7 +185,7 @@ function customSingleProductPage() {
             let labelText = jQuery(this).find('.label > label').text().replace(/\W/g, '').toLowerCase()
             if (labelText != 'size') return
 
-            jQuery(this).find('td.value > select > option').each(function() {
+            jQuery(this).find('td.value > select > option, td.value li[data-attribute_name^="attribute"]').each(function() {
                 sizeValues.push(jQuery(this).text().trim().toLowerCase())
             })
             let sizeValueText = sizeValues.join()
